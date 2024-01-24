@@ -18,7 +18,7 @@ export default function Select({
       <label className="text-blue-500 font-bold">{label}</label>
       <select value={value} className="p-2 border border-blue-200 rounded-xl hover:cursor-pointer" onChange={onChange}>
         {values.map((value: string | number) => (
-          <option value={value}>
+          <option value={value} key={value}>
             {typeof(value) == "string" ? value : value + " px"}
           </option>
         ))}

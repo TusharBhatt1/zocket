@@ -14,22 +14,17 @@ const ColorPicker = ({ onSelectColor }) => {
     // Update current color
     setCurrentColor(newColor);
 
-  
     const newHistory = [newColor, ...colorHistory.slice(0, 4)];
     setColorHistory(newHistory);
 
-    
     localStorage.setItem("colorHistory", JSON.stringify(newHistory));
 
- 
     onSelectColor(newColor);
 
-    
     setIsColorPickerOpen(false);
   };
 
   useEffect(() => {
-   
     const storedColorHistory = localStorage.getItem("colorHistory");
     if (storedColorHistory) {
       setColorHistory(JSON.parse(storedColorHistory));
@@ -38,9 +33,9 @@ const ColorPicker = ({ onSelectColor }) => {
 
   return (
     <div>
-      <div>
+      <div className="flex items-center">
         {colorHistory.length > 0 && (
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div className="flex items-center">
             {colorHistory.map((color, index) => (
               <div
                 key={index}
@@ -50,9 +45,11 @@ const ColorPicker = ({ onSelectColor }) => {
                   height: "20px",
                   marginRight: "5px",
                   cursor: "pointer",
-                  borderRadius:"100%"
+                  borderRadius: "100%",
                 }}
-                className={`${color===currentColor && "border-2 border-black"}`}
+                className={`${
+                  color === currentColor && "border-2 border-black"
+                }`}
                 onClick={() => {
                   setCurrentColor(color);
                   onSelectColor(color);
@@ -60,12 +57,22 @@ const ColorPicker = ({ onSelectColor }) => {
                 }}
               ></div>
             ))}
-            <button className="text-black" onClick={() => setIsColorPickerOpen(!isColorPickerOpen)}><CiCirclePlus size={22}/></button>
           </div>
         )}
+        <button
+          className="text-black"
+          onClick={() => setIsColorPickerOpen(!isColorPickerOpen)}
+        >
+          <CiCirclePlus size={22} />
+        </button>
+
       </div>
       {isColorPickerOpen && (
-        <ChromePicker color={currentColor} className="absolute" onChange={handleColorChange} />
+        <ChromePicker
+          color={currentColor}
+          className="absolute"
+          onChange={handleColorChange}
+        />
       )}
     </div>
   );
