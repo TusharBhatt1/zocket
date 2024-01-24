@@ -246,7 +246,7 @@ export default function Canvas() {
                     onChange={(e) => setCanvasState((prevState) => ({ ...prevState, selectedFontSize: Number(e.target.value) }))}
                   />
                   <Select
-                    values={[14, 18, 22, 26]}
+                    values={[14, 18, 22, 26,28]}
                     value={canvasState.buttonSize}
                     label="Button Size"
                     onChange={(e) => setCanvasState((prevState) => ({ ...prevState, buttonSize: Number(e.target.value) }))}
