@@ -218,7 +218,7 @@ export default function Canvas() {
     <div>
       {showIntro ? (
         <div className="flex gap-4 md:gap-12 justify-center items-center py-12">
-          <div className="flex flex-col gap-2 md:gap-7 rounded-lg shadow-xl p-12">
+          <div className="flex flex-col gap-2 md:gap-7 rounded-lg shadow-xl p-4 md:p-12">
             <p className="text-xl font-bold">What makes it unique</p>
             {uniquePoints.map((point, index) => (
               <span key={index} className="flex items-center gap-2 ">
