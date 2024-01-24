@@ -14,22 +14,22 @@ const ColorPicker = ({ onSelectColor }) => {
     // Update current color
     setCurrentColor(newColor);
 
-    // Update color history
+  
     const newHistory = [newColor, ...colorHistory.slice(0, 4)];
     setColorHistory(newHistory);
 
-    // Update local storage
+    
     localStorage.setItem("colorHistory", JSON.stringify(newHistory));
 
-    // Pass the selected color to the parent component
+ 
     onSelectColor(newColor);
 
-    // Close color picker popover
+    
     setIsColorPickerOpen(false);
   };
 
   useEffect(() => {
-    // Load color history from local storage on component mount
+   console.log("heyy")
     const storedColorHistory = localStorage.getItem("colorHistory");
     if (storedColorHistory) {
       setColorHistory(JSON.parse(storedColorHistory));

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import  { useRef, useState, useEffect } from "react";
 import { CiStar } from "react-icons/ci";
 import { FiUpload } from "react-icons/fi";
 import Select from "../components/Select";
@@ -6,6 +6,8 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import { ImageDataProps } from "../type";
 import ColorPicker from "../components/ColorPicker";
+import Lottie from "lottie-react";
+import animatedData from "../../public/Animation - 1706111791148.json"
 
 const jsonData =
   '{"caption":{"text":"1 & 2 BHK Luxury Apartments at just Rs.34.97 Lakhs","position":{"x":500,"y":50},"max_characters_per_line":31,"font_size":24,"alignment":"center","text_color":"#FFFFFF"},"cta":{"text":"Shop Now","position":{"x":190,"y":320},"text_color":"#000000","background_color":"#FFD700"},"image_mask":{"x":56,"y":442,"width":970,"height":600},"urls":{"mask":"https://d273i1jagfl543.cloudfront.net/templates/global_temp_landscape_temp_10_mask.png","stroke":"https://d273i1jagfl543.cloudfront.net/templates/global_temp_landscape_temp_10_Mask_stroke.png","design_pattern":"https://d273i1jagfl543.cloudfront.net/templates/global_temp_landscape_temp_10_Design_Pattern.png"}}';
@@ -237,8 +239,8 @@ export default function Canvas() {
               <p className="text-black">.</p>
             )}
           </div>
-          <div className="bar">
-            <div className="ball"></div>
+          <div className="h-80 w-80">
+            <Lottie animationData={animatedData} />
           </div>
         </div>
       ) : (
