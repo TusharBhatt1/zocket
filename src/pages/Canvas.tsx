@@ -16,6 +16,7 @@ const templateData: ImageDataProps = JSON.parse(jsonData);
 const uniquePoints = [
   "Technology stacks : React + Typescript + Tailwind",
   "Additional feature to Download the canvas",
+  "Responsive Design",
   "Replication of the given web page",
   "Code Splitting",
   "Clean code and Best Practices",
@@ -112,7 +113,7 @@ export default function Canvas() {
         const captionX = canvasWidth / 2;
         const captionY = 450;
 
-        const maxWidth = canvasWidth - 20; // Updated maxWidth
+        const maxWidth = canvasWidth - 20; 
         wrapText(
           context,
           canvasState.editedText,
@@ -245,7 +246,7 @@ export default function Canvas() {
         </div>
       ) : (
         <div
-          className={`flex justify-around items-center rounded-xl ${
+          className={`flex flex-col md:flex-row justify-around items-center rounded-xl ${
             canvasState.image ? "py-0" : "py-7"
           }`}
         >
@@ -258,8 +259,8 @@ export default function Canvas() {
               className="shadow-lg bg-white rounded-xl"
             />
           </div>
-          <div className="flex flex-col mt-4 gap-5 justify-center w-1/3 text-black bg-slate-50 rounded-xl p-7">
-            <div className="flex justify-around">
+          <div className="flex flex-col mt-4 gap-5 justify-center w-screen md:w-1/3 text-black bg-slate-50 rounded-xl p-7">
+            <div className="flex justify-around gap-4">
               <div className="flex justify-center items-center gap-2">
                 {canvasState.image && (
                   <img
@@ -270,7 +271,7 @@ export default function Canvas() {
                 )}
                 <label
                   htmlFor="imageInput"
-                  className="cursor-pointer flex items-center gap-2 hover:text-blue-500 "
+                  className="cursor-pointer flex items-center gap-2  hover:text-blue-500 "
                 >
                   <FiUpload size={20} /> Image
                   <input
