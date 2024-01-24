@@ -229,9 +229,7 @@ export default function Canvas() {
             <p className="font-extrabold text-2xl text-blue-700">
               By Tushar Bhatt
             </p>
-            <p className="text-slate-600 text-sm">
-              *images provided as default was not of the correct dimensions
-            </p>
+        
             {showContinue ? (
               <button
                 className="hover:bg-blue-500 hover:text-white hover:border-blue-500 animate-bounce mt-7 p-3 border border-blue-700 rounded-xl"
