@@ -206,7 +206,7 @@ export default function Canvas() {
           </div>
         </div>
       ) : (
-        <div className="flex justify-around items-center rounded-xl py-4" >
+        <div className={`flex justify-around items-center rounded-xl ${canvasState.image ? "py-0": "py-7"}`}>
           <div>
             <canvas
               ref={canvasRef}
