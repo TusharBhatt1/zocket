@@ -262,7 +262,7 @@ export default function Canvas() {
               className="shadow-lg bg-white rounded-xl"
             />
           </div>
-          <div className="flex flex-col gap-5 justify-center w-1/3 text-black bg-black rounded-xl p-12">
+          <div className="flex flex-col gap-5 justify-center w-1/3 text-black bg-black rounded-xl p-7">
             <div className="flex justify-around">
               <div className="flex justify-center text-white items-center gap-2">
                 {canvasState.image && (
