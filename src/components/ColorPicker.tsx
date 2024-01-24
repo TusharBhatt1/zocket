@@ -29,7 +29,7 @@ const ColorPicker = ({ onSelectColor }) => {
   };
 
   useEffect(() => {
-   console.log("heyy")
+   
     const storedColorHistory = localStorage.getItem("colorHistory");
     if (storedColorHistory) {
       setColorHistory(JSON.parse(storedColorHistory));
