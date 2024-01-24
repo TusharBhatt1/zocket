@@ -5,6 +5,7 @@ import Select from "../components/Select";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { ImageDataProps } from "../type";
+import ColorPicker from "../components/ColorPicker";
 
 const jsonData =
   '{"caption":{"text":"1 & 2 BHK Luxury Apartments at just Rs.34.97 Lakhs","position":{"x":500,"y":50},"max_characters_per_line":31,"font_size":24,"alignment":"center","text_color":"#FFFFFF"},"cta":{"text":"Shop Now","position":{"x":190,"y":320},"text_color":"#000000","background_color":"#FFD700"},"image_mask":{"x":56,"y":442,"width":970,"height":600},"urls":{"mask":"https://d273i1jagfl543.cloudfront.net/templates/global_temp_landscape_temp_10_mask.png","stroke":"https://d273i1jagfl543.cloudfront.net/templates/global_temp_landscape_temp_10_Mask_stroke.png","design_pattern":"https://d273i1jagfl543.cloudfront.net/templates/global_temp_landscape_temp_10_Design_Pattern.png"}}';
@@ -195,19 +196,7 @@ export default function Canvas() {
   useEffect(() => {
     setCanvas();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    canvasState.selectedTextColor,
-    canvasState.selectedFontSize,
-    canvasState.editedText,
-    canvasState.selectedBackgroundColor,
-    canvasState.selectedCTAText,
-    canvasState.buttonSize,
-    canvasState.theme,
-    canvasState.fontStyle,
-    canvasState.isBold,
-    canvasState.isItalic,
-    canvasState.isImageUploaded,
-  ]);
+  }, [canvasState]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -215,21 +204,28 @@ export default function Canvas() {
     }, 1000);
   }, []);
 
+  const handleColorSelect = (selectedColor) => {
+    setCanvasState((prevState) => ({
+      ...prevState,
+      theme: selectedColor,
+    }));
+  };
+
   return (
     <div>
       {showIntro ? (
-        <div className="flex gap-12 justify-center items-center py-12 text-white">
+        <div className="flex gap-12 justify-center items-center py-12">
           <div className="flex flex-col gap-2 md:gap-7 rounded-lg shadow-xl p-12">
             <p className="text-xl font-bold">What makes it unique</p>
             {uniquePoints.map((point, index) => (
               <span key={index} className="flex items-center gap-2 ">
-                <CiStar className="text-yellow-200" /> {point}
+                <CiStar className="text-yellow-800" /> {point}
               </span>
             ))}
             <p className="font-extrabold text-2xl text-blue-700">
               By Tushar Bhatt
             </p>
-        
+
             {showContinue ? (
               <button
                 className="hover:bg-blue-500 hover:text-white hover:border-blue-500 animate-bounce mt-7 p-3 border border-blue-700 rounded-xl"
@@ -260,9 +256,9 @@ export default function Canvas() {
               className="shadow-lg bg-white rounded-xl"
             />
           </div>
-          <div className="flex flex-col gap-5 justify-center w-1/3 text-black bg-black rounded-xl p-7">
+          <div className="flex flex-col mt-4 gap-5 justify-center w-1/3 text-black bg-slate-50 rounded-xl p-7">
             <div className="flex justify-around">
-              <div className="flex justify-center text-white items-center gap-2">
+              <div className="flex justify-center items-center gap-2">
                 {canvasState.image && (
                   <img
                     src={canvasState.image.src}
@@ -299,6 +295,7 @@ export default function Canvas() {
                       }))
                     }
                   />
+
                   <Select
                     values={[14, 18, 22, 26, 28]}
                     value={canvasState.buttonSize}
@@ -323,6 +320,33 @@ export default function Canvas() {
                     }))
                   }
                 />
+                <div className="flex items-center gap-2">
+                  <Input
+                    label="Background"
+                    value={canvasState.selectedBackgroundColor}
+                    type="color"
+                    onChange={(e) =>
+                      setCanvasState((prevState) => ({
+                        ...prevState,
+                        selectedBackgroundColor: e.target.value,
+                      }))
+                    }
+                  />
+                  <div className="flex flex-col gap-2 text-center">
+                  <p className="text-blue-500 font-bold ">Theme</p>
+                  <ColorPicker onSelectColor={handleColorSelect} />
+                  </div>
+                  <Input
+                    label="Text "
+                    type="color"
+                    onChange={(e) =>
+                      setCanvasState((prevState) => ({
+                        ...prevState,
+                        selectedTextColor: e.target.value,
+                      }))
+                    }
+                  />
+                </div>
                 <div className="flex">
                   <Input
                     label="Bold"
@@ -371,40 +395,7 @@ export default function Canvas() {
                   }
                 />
 
-                <div className="flex items-center gap-2">
-                  <Input
-                    label="Background"
-                    value={canvasState.selectedBackgroundColor}
-                    type="color"
-                    onChange={(e) =>
-                      setCanvasState((prevState) => ({
-                        ...prevState,
-                        selectedBackgroundColor: e.target.value,
-                      }))
-                    }
-                  />
-                  <Input
-                    label="Theme"
-                    value={canvasState.theme}
-                    type="color"
-                    onChange={(e) =>
-                      setCanvasState((prevState) => ({
-                        ...prevState,
-                        theme: e.target.value,
-                      }))
-                    }
-                  />
-                  <Input
-                    label="Text "
-                    type="color"
-                    onChange={(e) =>
-                      setCanvasState((prevState) => ({
-                        ...prevState,
-                        selectedTextColor: e.target.value,
-                      }))
-                    }
-                  />
-                </div>
+                
 
                 <Button label="Download" onClick={downloadCanvas} />
               </>

@@ -1,0 +1,74 @@
+// ColorPicker.js
+import React, { useState, useEffect } from "react";
+import { ChromePicker } from "react-color";
+import { CiCirclePlus } from "react-icons/ci";
+
+const ColorPicker = ({ onSelectColor }) => {
+  const [currentColor, setCurrentColor] = useState("#000000");
+  const [colorHistory, setColorHistory] = useState([]);
+  const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
+
+  const handleColorChange = (color) => {
+    const newColor = color.hex;
+
+    // Update current color
+    setCurrentColor(newColor);
+
+    // Update color history
+    const newHistory = [newColor, ...colorHistory.slice(0, 4)];
+    setColorHistory(newHistory);
+
+    // Update local storage
+    localStorage.setItem("colorHistory", JSON.stringify(newHistory));
+
+    // Pass the selected color to the parent component
+    onSelectColor(newColor);
+
+    // Close color picker popover
+    setIsColorPickerOpen(false);
+  };
+
+  useEffect(() => {
+    // Load color history from local storage on component mount
+    const storedColorHistory = localStorage.getItem("colorHistory");
+    if (storedColorHistory) {
+      setColorHistory(JSON.parse(storedColorHistory));
+    }
+  }, []);
+
+  return (
+    <div>
+      <div>
+        {colorHistory.length > 0 && (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {colorHistory.map((color, index) => (
+              <div
+                key={index}
+                style={{
+                  backgroundColor: color,
+                  width: "20px",
+                  height: "20px",
+                  marginRight: "5px",
+                  cursor: "pointer",
+                  borderRadius:"100%"
+                }}
+                className={`${color===currentColor && "border-2 border-black"}`}
+                onClick={() => {
+                  setCurrentColor(color);
+                  onSelectColor(color);
+                  setIsColorPickerOpen(false);
+                }}
+              ></div>
+            ))}
+            <button className="text-black" onClick={() => setIsColorPickerOpen(!isColorPickerOpen)}><CiCirclePlus size={22}/></button>
+          </div>
+        )}
+      </div>
+      {isColorPickerOpen && (
+        <ChromePicker color={currentColor} className="absolute" onChange={handleColorChange} />
+      )}
+    </div>
+  );
+};
+
+export default ColorPicker;

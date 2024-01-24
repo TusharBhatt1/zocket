@@ -13,7 +13,7 @@ export default function Input({ label, value, type, onChange,checked }: InputPro
        {label}
        </label>
         <input
-        className={`w-full border-2 border-blue-200 p-3 rounded-xl hover:cursor-pointer `}
+        className={`${type==="color" ? "w-12 p-0 rounded-[100%]" : "w-full p-3 border-2 border-blue-200"}   rounded-xl hover:cursor-pointer `}
           type={type}
           checked={checked}
           value={value}
