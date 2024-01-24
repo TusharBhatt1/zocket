@@ -37,8 +37,8 @@ export default function Canvas() {
 
   const canvasHeight = 400;
   const canvasWidth = 500;
-  const canvasImageHeight = canvasHeight / 2;
-  const canvasImageWidth = 200;
+  const canvasImageHeight = 350;
+  const canvasImageWidth = 400;
   const lineHeight = 1.2;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -91,10 +91,10 @@ export default function Canvas() {
         context.textAlign = "center";
         context.textBaseline = "middle";
 
-        const captionX = canvasWidth / 4;
-        const captionY = canvasImageHeight + (canvasHeight - canvasImageHeight) / 2;
+        const captionX = canvasWidth / 3;
+        const captionY = 450;
 
-        const maxWidth = canvasWidth / 2 - 20;
+        const maxWidth = canvasWidth / 2 - 10;
         wrapText(context, canvasState.editedText, captionX, captionY, maxWidth, canvasState.selectedFontSize, lineHeight);
 
         context.fillStyle = canvasState.theme;
@@ -106,8 +106,8 @@ export default function Canvas() {
         const buttonWidth = context.measureText(canvasState.selectedCTAText).width + 20;
         const buttonHeight = canvasState.buttonSize + 10;
 
-        const buttonX = (canvasWidth * 3) / 4;
-        const buttonY = canvasImageHeight + (canvasHeight - canvasImageHeight) / 2;
+        const buttonX = (canvasWidth * 4) / 4;
+        const buttonY = 450;
 
         context.fillRect(buttonX - buttonWidth / 2, buttonY, buttonWidth, buttonHeight);
         context.strokeRect(buttonX - buttonWidth / 2, buttonY, buttonWidth, buttonHeight);
@@ -208,12 +208,14 @@ export default function Canvas() {
       ) : (
         <div className={`flex justify-around items-center rounded-xl ${canvasState.image ? "py-0": "py-7"}`}>
           <div>
-            <canvas
-              ref={canvasRef}
-              height={canvasHeight}
-              width={canvasWidth}
-              className="shadow-lg bg-white rounded-xl"
-            />
+          <canvas
+  ref={canvasRef}
+  height={canvasHeight * window.devicePixelRatio}
+  width={canvasWidth * window.devicePixelRatio}
+  style={{ width: `${canvasWidth}px`, height: `${canvasHeight}px` }}
+  className="shadow-lg bg-white rounded-xl"
+/>
+
           </div>
           <div className="flex flex-col gap-5 justify-center w-1/3 text-black bg-black rounded-xl p-12">
             <div className="flex justify-around">
@@ -240,11 +242,11 @@ export default function Canvas() {
                   <Select
                     label="Font Size"
                     value={canvasState.selectedFontSize}
-                    values={[12, 16, 18, 22]}
+                    values={[14, 16, 22, 26]}
                     onChange={(e) => setCanvasState((prevState) => ({ ...prevState, selectedFontSize: Number(e.target.value) }))}
                   />
                   <Select
-                    values={[12, 14, 18, 22]}
+                    values={[14, 18, 22, 26]}
                     value={canvasState.buttonSize}
                     label="Button Size"
                     onChange={(e) => setCanvasState((prevState) => ({ ...prevState, buttonSize: Number(e.target.value) }))}
