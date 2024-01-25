@@ -43,7 +43,7 @@ export default function Canvas() {
   const canvasHeight = 400;
   const canvasWidth = 500;
   const canvasImageHeight = 350;
-  const canvasImageWidth = 450;
+  const canvasImageWidth = 500;
   const lineHeight = 1.2;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
