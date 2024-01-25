@@ -41,7 +41,7 @@ export default function Canvas() {
   });
 
   const canvasHeight = 400;
-  const canvasWidth = 500;
+  const canvasWidth = 550;
   const canvasImageHeight = 350;
   const canvasImageWidth = 400;
   const lineHeight = 1.2;
